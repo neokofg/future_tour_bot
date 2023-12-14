@@ -24,7 +24,7 @@ class BotService {
 
     public function getFunction($args, $u)
     {
-        switch ($args) {
+        switch ($u->status) {
             case 'started':
                 $this->started($args['chat']['id'],$u);
                 break;
