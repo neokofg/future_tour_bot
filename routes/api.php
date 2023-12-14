@@ -15,4 +15,4 @@ use App\Http\Controllers\BotController;
 |
 */
 
-Route::post('/5942210117:AAEkmdc18KBYnDLWAEZWdyPv1wBDzicjkMs/webhook', [BotController::class, "init"]);
+Route::post('/6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/webhook', [BotController::class, "init"]);
