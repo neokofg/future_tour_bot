@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->string('status');
+            $table->string('status')->default("started");
             $table->string('userid')->unique();
             $table->string('chatid')->unique();
             $table->string('first_name');
