@@ -6,9 +6,9 @@ use App\Models\User;
 
 class BotService {
 
-    public function authUser($args)
+    public function authUser($args): User
     {
-        $u = User::where("id", "=", $args['from']['id'])->first();
+        $u = User::where("userid", "=", $args['from']['id'])->first();
         if(!$u){
             $u = new User();
             $u->userid = $args['from']['id'];
@@ -49,11 +49,9 @@ class BotService {
             }';
         $data = [
             'chat_id' => $chat_id,
-            'text' => 'Дамы '. PHP_EOL .'
-                Вас приветствует Future© '. PHP_EOL .'
-                - Чтобы зарабатывать деньги в турах, '. PHP_EOL .'
-                • необходимо заполнить анкету '. PHP_EOL .'
-                • узнать о нас
+            'text' => 'Дамы '. PHP_EOL .'Вас приветствует Future© '. PHP_EOL .' - Чтобы зарабатывать деньги в турах, '. PHP_EOL .'
+    • необходимо заполнить анкету '. PHP_EOL .'
+    • узнать о нас
             ',
             'reply_markup' => json_encode(json_decode($kb))
         ];

@@ -19,6 +19,7 @@ class BotController extends Controller
             $args = $args['message'];
             $u = $this->botService->authUser($args);
             $this->botService->getFunction($args, $u);
+            return response(true, 200);
         } catch (\Throwable $e) {
             return response($e, 422);
         }
