@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+    php:
+        container_name: php
+        build: .
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./php/php.ini:/usr/local/etc/php/php.ini
+            - .:/workspace
+    nginx:
+        depends_on:
+            - php
+        image: nginx:latest
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./nginx:/etc/nginx/conf.d
+            - .:/workspace
+            - ../cyber-test/site:/site
+    pg:
+        container_name: pg
+        image: postgres:15-alpine
+        volumes:
+            - .:/workspace/db
+        environment:
+            - POSTGRES_DB=main
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=password
+        ports:
+            - "5432:5432"
+        restart: on-failure
+    pgadmin:
+        depends_on:
+            - pg
+        container_name: pgadmin
+        image: dpage/pgadmin4:latest
+        volumes:
+            - .:/workspace/pgdata
+        ports:
+            - "5050:80"
+        restart: unless-stopped
+        env_file:
+            - .env
