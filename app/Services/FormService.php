@@ -50,20 +50,22 @@ class FormService {
             $u->save();
         });
         deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
-        deleteMessage(createDeleteMessageData($u->chatid, (intval($args['message_id'])) - 1));
-        sendMessage(createMessageData($u->chatid, $text));
+        editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
     }
 
     private function started($args, $u, $text)
     {
-        DB::transaction(function () use($args, $u) {
+        DB::transaction(function () use($args, $u, $text) {
            $f = Form::firstOrNew(['user_id' => $u->id]);
            $f->name = $args['text'];
            $f->save();
 
+
+           $response = sendMessage(createMessageData($u->chatid, $text));
+
            $u->status = "formBirthdate";
+           $u->bot_messageid = $response->json('result.message_id');
            $u->save();
         });
-        sendMessage(createMessageData($u->chatid, $text));
     }
 }

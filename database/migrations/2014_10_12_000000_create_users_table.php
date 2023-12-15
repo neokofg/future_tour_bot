@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->integer('id')->primary();
             $table->string('status')->default("started");
-            $table->string('chatid')->unique();
+            $table->integer('chatid')->unique();
+            $table->integer('bot_messageid');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('username');
