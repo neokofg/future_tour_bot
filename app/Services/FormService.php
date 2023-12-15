@@ -44,70 +44,70 @@ class FormService {
                 $this->updateFormCombined($args,$u, 'contact', 'formAnal_sex', 'Анальный секс', true);
                 break;
             case 'formAnal_sex':
-                $this->updateFormCombined($args,$u, 'anal_sex', 'formCum_in_mouth', 'Окончание в рот', true, false, true);
+                $this->updateFormCombined($args,$u, 'anal_sex', 'formCum_in_mouth', 'Окончание в рот', false, false, true);
                 break;
             case 'formCum_in_mouth':
-                $this->updateFormCombined($args,$u, 'cum_in_mouth', 'formSwallowing', 'Проглатывание', true, false, true);
+                $this->updateFormCombined($args,$u, 'cum_in_mouth', 'formSwallowing', 'Проглатывание', false, false, true);
                 break;
             case 'formSwallowing':
-                $this->updateFormCombined($args,$u, 'swallowing', 'formСum_on_face', 'Окончание на лицо', true, false, true);
+                $this->updateFormCombined($args,$u, 'swallowing', 'formСum_on_face', 'Окончание на лицо', false, false, true);
                 break;
             case 'formСum_on_face':
-                $this->updateFormCombined($args,$u, 'cum_on_face', 'formСum_on_body', 'Окончание на тело', true, false, true);
+                $this->updateFormCombined($args,$u, 'cum_on_face', 'formСum_on_body', 'Окончание на тело', false, false, true);
                 break;
             case 'formСum_on_body':
-                $this->updateFormCombined($args,$u, 'cum_on_body', 'formBlowjob_without_a_condom', 'Минет без презерватива', true, false, true);
+                $this->updateFormCombined($args,$u, 'cum_on_body', 'formBlowjob_without_a_condom', 'Минет без презерватива', false, false, true);
                 break;
             case 'formBlowjob_without_a_condom':
-                $this->updateFormCombined($args,$u, 'blowjob_without_a_condom', 'formDeep_throat', 'Глубокая глотка', true, false, true);
+                $this->updateFormCombined($args,$u, 'blowjob_without_a_condom', 'formDeep_throat', 'Глубокая глотка', false, false, true);
                 break;
             case 'formDeep_throat':
-                $this->updateFormCombined($args,$u, 'deep_throat', 'formFrench_kiss', 'Французский поцелуй', true, false, true);
+                $this->updateFormCombined($args,$u, 'deep_throat', 'formFrench_kiss', 'Французский поцелуй', false, false, true);
                 break;
             case 'formFrench_kiss':
-                $this->updateFormCombined($args,$u, 'french_kiss', 'formFisting', 'Фистинг', true, false, true);
+                $this->updateFormCombined($args,$u, 'french_kiss', 'formFisting', 'Фистинг', false, false, true);
                 break;
             case 'formFisting':
-                $this->updateFormCombined($args,$u, 'fisting', 'formRimming', 'Римминг', true, false, true);
+                $this->updateFormCombined($args,$u, 'fisting', 'formRimming', 'Римминг', false, false, true);
                 break;
             case 'formRimming':
-                $this->updateFormCombined($args,$u, 'rimming', 'formRimming_you', 'Римминг тебе', true, false, true);
+                $this->updateFormCombined($args,$u, 'rimming', 'formRimming_you', 'Римминг тебе', false, false, true);
                 break;
             case 'formRimming_you':
-                $this->updateFormCombined($args,$u, 'rimming_you', 'formFootjob', 'Футфетиш', true, false, true);
+                $this->updateFormCombined($args,$u, 'rimming_you', 'formFootjob', 'Футфетиш', false, false, true);
                 break;
             case 'formFootjob':
-                $this->updateFormCombined($args,$u, 'footjob', 'formGolden_shower', 'Золотой дождь', true, false, true);
+                $this->updateFormCombined($args,$u, 'footjob', 'formGolden_shower', 'Золотой дождь', false, false, true);
                 break;
             case 'formGolden_shower':
-                $this->updateFormCombined($args,$u, 'golden_shower', 'formLight_domination', 'Легкая доминация', true, false, true);
+                $this->updateFormCombined($args,$u, 'golden_shower', 'formLight_domination', 'Легкая доминация', false, false, true);
                 break;
             case 'formLight_domination':
-                $this->updateFormCombined($args,$u, 'light_domination', 'formHard_domination', 'Жесткая доминация', true, false, true);
+                $this->updateFormCombined($args,$u, 'light_domination', 'formHard_domination', 'Жесткая доминация', false, false, true);
                 break;
             case 'formHard_domination':
-                $this->updateFormCombined($args,$u, 'hard_domination', 'formAre_you_a_slave', 'Ты рабыня', true, false, true);
+                $this->updateFormCombined($args,$u, 'hard_domination', 'formAre_you_a_slave', 'Ты рабыня', false, false, true);
                 break;
             case 'formAre_you_a_slave':
-                $this->updateFormCombined($args,$u, 'are_you_a_slave', 'formMarried_couple', 'Семейная пара', true, false, true);
+                $this->updateFormCombined($args,$u, 'are_you_a_slave', 'formMarried_couple', 'Семейная пара', false, false, true);
                 break;
             case 'formMarried_couple':
-                $this->updateFormCombined($args,$u, 'married_couple', 'formGroup_sex', 'Групповой секс', true, false, true);
+                $this->updateFormCombined($args,$u, 'married_couple', 'formGroup_sex', 'Групповой секс', false, false, true);
                 break;
             case 'formGroup_sex':
-                $this->updateFormCombined($args,$u, 'group_sex', 'formRole_playing_games', 'Ролевые игры', true, false, true);
+                $this->updateFormCombined($args,$u, 'group_sex', 'formRole_playing_games', 'Ролевые игры', false, false, true);
                 break;
             case 'formRole_playing_games':
-                $this->updateFormCombined($args,$u, 'role_playing_games', 'formProstate_massage', 'Массаж простаты', true, false, true);
+                $this->updateFormCombined($args,$u, 'role_playing_games', 'formProstate_massage', 'Массаж простаты', false, false, true);
                 break;
             case 'formProstate_massage':
-                $this->updateFormCombined($args,$u, 'prostate_massage', 'formLicking_testicles', 'Лизание яичек', true, false, true);
+                $this->updateFormCombined($args,$u, 'prostate_massage', 'formLicking_testicles', 'Лизание яичек', false, false, true);
                 break;
             case 'formLicking_testicles':
-                $this->updateFormCombined($args,$u, 'licking_testicles', 'formNormal_relax_massage', 'Обычный расслабляющий массаж тела ему', true, false, true);
+                $this->updateFormCombined($args,$u, 'licking_testicles', 'formNormal_relax_massage', 'Обычный расслабляющий массаж тела ему', false, false, true);
                 break;
             case 'formNormal_relax_massage':
-                $this->updateFormCombined($args,$u, 'normal_relax_massage', 'formStriptease', 'Стриптиз', true, false, true);
+                $this->updateFormCombined($args,$u, 'normal_relax_massage', 'formStriptease', 'Стриптиз', false, false, true);
                 break;
             case 'formStriptease':
                 $this->updateFormCombined($args,$u, 'striptease', 'formPortfolio', 'Спасибо, что вы заполнили анкету <3' . "\n" . '- Первый этап выполнен, остался последний', false, true, false);
@@ -139,7 +139,7 @@ class FormService {
 
         deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
 
-        if ($actionStart) {
+        if ($actionStart || $action) {
             editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text, $this->keyboardsService->answer()));
         } elseif ($actionLast) {
             editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
