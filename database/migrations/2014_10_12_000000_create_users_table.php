@@ -15,7 +15,7 @@ return new class extends Migration
             $table->integer('id')->primary();
             $table->string('status')->default("started");
             $table->integer('chatid')->unique();
-            $table->integer('bot_messageid');
+            $table->integer('bot_messageid')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('username');
