@@ -14,15 +14,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable = [
-        'status',
-        'userid',
-        'chatid',
-        'first_name',
-        'last_name',
-        'username',
-        'language_code'
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function form(): HasOne
     {

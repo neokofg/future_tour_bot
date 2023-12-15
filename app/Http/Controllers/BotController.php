@@ -21,12 +21,13 @@ class BotController extends Controller
                 $args = $args['message'];
                 $u = $this->botService->authUser($args);
                 $this->botService->fetchMessage($args, $u);
+                return response(true, 200);
             } else if (isset($args['callback_query'])) {
                 $args = $args['callback_query'];
                 $u = $this->callbackService->authUser($args);
                 $this->callbackService->fetchCallback($args, $u);
-            }
-            return response(true, 200);
+                return response(true, 200);
+            };
         } catch (\Throwable $e) {
             return response($e, 422);
         }
