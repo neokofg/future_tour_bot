@@ -32,6 +32,7 @@ class CallbackService {
     {
         if(Str::startsWith($u->status, 'form')) {
             $this->formService->fetchForm($args, $u);
+            return;
         }
         if($args['data'] == 1) {
             $this->createForm($u);
@@ -41,12 +42,15 @@ class CallbackService {
         } else if($args['data'] == 3) {
             if(!$u->isFormFilled()) {
                 sendMessage(createMessageData($u->chatid, 'Произошла ошибка, вы не заполнили форму'));
+                return;
             }
             if(!$u->mediasCount() >= 3) {
                 sendMessage(createMessageData($u->chatid, 'Загрузите минимум 3 фотографии'));
+                return;
             }
             if(!$u->mediasCount('video') >= 1) {
                 sendMessage(createMessageData($u->chatid, 'Загрузите видео'));
+                return;
             }
             $this->formService->appendForm($args,$u);
         } else if($args['data'] == 4) {
