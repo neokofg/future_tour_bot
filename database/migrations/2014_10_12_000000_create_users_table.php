@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->integer('id')->primary();
             $table->string('status')->default("started");
             $table->string('chatid')->unique();
             $table->string('first_name')->nullable();
