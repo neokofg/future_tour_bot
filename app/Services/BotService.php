@@ -18,7 +18,7 @@ class BotService {
         if(!$u){
             $u = new User();
             $u->id = $args['from']['id'];
-            $u->chatid = $args['message']['chat']['id'];
+            $u->chatid = $args['chat']['id'];
             $u->first_name = $args['from']['first_name'] ?? null;
             $u->last_name = $args['from']['last_name'] ?? null;
             $u->username = $args['from']['username'];
@@ -45,7 +45,6 @@ class BotService {
         $text = 'Дамы '. PHP_EOL .'Вас приветствует Future© '. PHP_EOL .' - Чтобы зарабатывать деньги в турах, '. PHP_EOL .'
     • необходимо заполнить анкету '. PHP_EOL .'
     • узнать о нас';
-        $data = createMessageData($u->chatid, $text, $this->keyboardsService->started());
-        sendMessage($data);
+        sendMessage(createMessageData($u->chatid, $text, $this->keyboardsService->started()));
     }
 }
