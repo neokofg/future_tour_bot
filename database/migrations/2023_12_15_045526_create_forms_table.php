@@ -16,9 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string("name");
             $table->string("birthdate")->nullable();
-            $table->integer("height")->nullable();
-            $table->integer("weight")->nullable();
-            $table->integer("size")->nullable();
+            $table->string("height")->nullable();
+            $table->string("weight")->nullable();
+            $table->string("size")->nullable();
             $table->string("citizenship")->nullable();
             $table->string("visa")->nullable();
             $table->string("tour_date")->nullable();
