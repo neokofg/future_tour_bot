@@ -138,7 +138,7 @@ class FormService {
         });
         if(isset($args['message_id'])){
             deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
-        } else deleteMessage(createDeleteMessageData($u->chatid, $args['message']['message_id']));
+        }
 
         if ($actionStart || $action) {
             editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text, $this->keyboardsService->answer()));
