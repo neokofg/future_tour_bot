@@ -60,8 +60,7 @@ class FormService {
            $f->name = $args['text'];
            $f->save();
 
-
-           sendMessage(createMessageData($u->chatid, $text));
+            editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
 
            $u->status = "formBirthdate";
            $u->save();
