@@ -14,174 +14,144 @@ class FormService {
     {
         switch ($u->status) {
             case 'formStarted':
-                $this->started($args, $u, 'Год вашего рождения');
+                $this->updateFormCombined($args, $u, 'name', 'formBirthdate','Год вашего рождения');
                 break;
             case 'formBirthdate':
-                $this->updateForm($args,$u, 'birthdate', 'formHeight', 'Рост');
+                $this->updateFormCombined($args,$u, 'birthdate', 'formHeight', 'Рост');
                 break;
             case 'formHeight':
-                $this->updateForm($args,$u, 'height', 'formWeight', 'Вес');
+                $this->updateFormCombined($args,$u, 'height', 'formWeight', 'Вес');
                 break;
             case 'formWeight':
-                $this->updateForm($args,$u, 'weight', 'formSize', 'Размер');
+                $this->updateFormCombined($args,$u, 'weight', 'formSize', 'Размер');
                 break;
             case 'formSize':
-                $this->updateForm($args,$u, 'size', 'formCitizenship', 'Гражданство');
+                $this->updateFormCombined($args,$u, 'size', 'formCitizenship', 'Гражданство');
                 break;
             case 'formCitizenship':
-                $this->updateForm($args,$u, 'citizenship', 'formVisa', 'Наличие визы');
+                $this->updateFormCombined($args,$u, 'citizenship', 'formVisa', 'Наличие визы');
                 break;
             case 'formVisa':
-                $this->updateForm($args,$u, 'visa', 'formTour_date', 'Желаемая дата тура');
+                $this->updateFormCombined($args,$u, 'visa', 'formTour_date', 'Желаемая дата тура');
                 break;
             case 'formTour_date':
-                $this->updateForm($args,$u, 'tour_date', 'formCountries', 'В каких странах был опыт');
+                $this->updateFormCombined($args,$u, 'tour_date', 'formCountries', 'В каких странах был опыт');
                 break;
             case 'formCountries':
-                $this->updateForm($args,$u, 'countries', 'formContact', 'Рабочий номер телефона/логин');
+                $this->updateFormCombined($args,$u, 'countries', 'formContact', 'Рабочий номер телефона/логин');
                 break;
             case 'formContact':
-                $this->updateFormWithActionStart($args,$u, 'contact', 'formAnal_sex', 'Анальный секс');
+                $this->updateFormCombined($args,$u, 'contact', 'formAnal_sex', 'Анальный секс', true);
                 break;
             case 'formAnal_sex':
-                $this->updateFormWithAction($args,$u, 'anal_sex', 'formCum_in_mouth', 'Окончание в рот');
+                $this->updateFormCombined($args,$u, 'anal_sex', 'formCum_in_mouth', 'Окончание в рот', false, false, true);
                 break;
             case 'formCum_in_mouth':
-                $this->updateFormWithAction($args,$u, 'cum_in_mouth', 'formSwallowing', 'Проглатывание');
+                $this->updateFormCombined($args,$u, 'cum_in_mouth', 'formSwallowing', 'Проглатывание', false, false, true);
                 break;
             case 'formSwallowing':
-                $this->updateFormWithAction($args,$u, 'swallowing', 'formСum_on_face', 'Окончание на лицо');
+                $this->updateFormCombined($args,$u, 'swallowing', 'formСum_on_face', 'Окончание на лицо', false, false, true);
                 break;
             case 'formСum_on_face':
-                $this->updateFormWithAction($args,$u, 'cum_on_face', 'formСum_on_body', 'Окончание на тело');
+                $this->updateFormCombined($args,$u, 'cum_on_face', 'formСum_on_body', 'Окончание на тело', false, false, true);
                 break;
             case 'formСum_on_body':
-                $this->updateFormWithAction($args,$u, 'cum_on_body', 'formBlowjob_without_a_condom', 'Минет без презерватива');
+                $this->updateFormCombined($args,$u, 'cum_on_body', 'formBlowjob_without_a_condom', 'Минет без презерватива', false, false, true);
                 break;
             case 'formBlowjob_without_a_condom':
-                $this->updateFormWithAction($args,$u, 'blowjob_without_a_condom', 'formDeep_throat', 'Глубокая глотка');
+                $this->updateFormCombined($args,$u, 'blowjob_without_a_condom', 'formDeep_throat', 'Глубокая глотка', false, false, true);
                 break;
             case 'formDeep_throat':
-                $this->updateFormWithAction($args,$u, 'deep_throat', 'formFrench_kiss', 'Французский поцелуй');
+                $this->updateFormCombined($args,$u, 'deep_throat', 'formFrench_kiss', 'Французский поцелуй', false, false, true);
                 break;
             case 'formFrench_kiss':
-                $this->updateFormWithAction($args,$u, 'french_kiss', 'formFisting', 'Фистинг');
+                $this->updateFormCombined($args,$u, 'french_kiss', 'formFisting', 'Фистинг', false, false, true);
                 break;
             case 'formFisting':
-                $this->updateFormWithAction($args,$u, 'fisting', 'formRimming', 'Римминг');
+                $this->updateFormCombined($args,$u, 'fisting', 'formRimming', 'Римминг', false, false, true);
                 break;
             case 'formRimming':
-                $this->updateFormWithAction($args,$u, 'rimming', 'formRimming_you', 'Римминг тебе');
+                $this->updateFormCombined($args,$u, 'rimming', 'formRimming_you', 'Римминг тебе', false, false, true);
                 break;
             case 'formRimming_you':
-                $this->updateFormWithAction($args,$u, 'rimming_you', 'formFootjob', 'Футфетиш');
+                $this->updateFormCombined($args,$u, 'rimming_you', 'formFootjob', 'Футфетиш', false, false, true);
                 break;
             case 'formFootjob':
-                $this->updateFormWithAction($args,$u, 'footjob', 'formGolden_shower', 'Золотой дождь');
+                $this->updateFormCombined($args,$u, 'footjob', 'formGolden_shower', 'Золотой дождь', false, false, true);
                 break;
             case 'formGolden_shower':
-                $this->updateFormWithAction($args,$u, 'golden_shower', 'formLight_domination', 'Легкая доминация');
+                $this->updateFormCombined($args,$u, 'golden_shower', 'formLight_domination', 'Легкая доминация', false, false, true);
                 break;
             case 'formLight_domination':
-                $this->updateFormWithAction($args,$u, 'light_domination', 'formHard_domination', 'Жесткая доминация');
+                $this->updateFormCombined($args,$u, 'light_domination', 'formHard_domination', 'Жесткая доминация', false, false, true);
                 break;
             case 'formHard_domination':
-                $this->updateFormWithAction($args,$u, 'hard_domination', 'formAre_you_a_slave', 'Ты рабыня');
+                $this->updateFormCombined($args,$u, 'hard_domination', 'formAre_you_a_slave', 'Ты рабыня', false, false, true);
                 break;
             case 'formAre_you_a_slave':
-                $this->updateFormWithAction($args,$u, 'are_you_a_slave', 'formMarried_couple', 'Семейная пара');
+                $this->updateFormCombined($args,$u, 'are_you_a_slave', 'formMarried_couple', 'Семейная пара', false, false, true);
                 break;
             case 'formMarried_couple':
-                $this->updateFormWithAction($args,$u, 'married_couple', 'formGroup_sex', 'Групповой секс');
+                $this->updateFormCombined($args,$u, 'married_couple', 'formGroup_sex', 'Групповой секс', false, false, true);
                 break;
             case 'formGroup_sex':
-                $this->updateFormWithAction($args,$u, 'group_sex', 'formRole_playing_games', 'Ролевые игры');
+                $this->updateFormCombined($args,$u, 'group_sex', 'formRole_playing_games', 'Ролевые игры', false, false, true);
                 break;
             case 'formRole_playing_games':
-                $this->updateFormWithAction($args,$u, 'role_playing_games', 'formProstate_massage', 'Массаж простаты');
+                $this->updateFormCombined($args,$u, 'role_playing_games', 'formProstate_massage', 'Массаж простаты', false, false, true);
                 break;
             case 'formProstate_massage':
-                $this->updateFormWithAction($args,$u, 'prostate_massage', 'formLicking_testicles', 'Лизание яичек');
+                $this->updateFormCombined($args,$u, 'prostate_massage', 'formLicking_testicles', 'Лизание яичек', false, false, true);
                 break;
             case 'formLicking_testicles':
-                $this->updateFormWithAction($args,$u, 'licking_testicles', 'formNormal_relax_massage', 'Обычный расслабляющий массаж тела ему');
+                $this->updateFormCombined($args,$u, 'licking_testicles', 'formNormal_relax_massage', 'Обычный расслабляющий массаж тела ему', false, false, true);
                 break;
             case 'formNormal_relax_massage':
-                $this->updateFormWithAction($args,$u, 'normal_relax_massage', 'formStriptease', 'Стриптиз');
+                $this->updateFormCombined($args,$u, 'normal_relax_massage', 'formStriptease', 'Стриптиз', false, false, true);
                 break;
             case 'formStriptease':
-                $this->updateFormWithActionLast($args,$u, 'striptease', 'formPortfolio', 'Спасибо, что вы заполнили анкету <3' . "\n" . '- Первый этап выполнен, остался последний');
+                $this->updateFormCombined($args,$u, 'striptease', 'formPortfolio', 'Спасибо, что вы заполнили анкету <3' . "\n" . '- Первый этап выполнен, остался последний', false, true, false);
+                break;
+            case 'formPortfolio':
+                $this->uploadToPortfolio();
                 break;
         }
     }
 
-    private function updateForm($args, $u, $field, $status, $text)
+    private function updateFormCombined($args, $u, $field, $status, $text, $actionStart = false, $actionLast = false, $action = false)
     {
-        DB::transaction(function () use($args, $u, $field, $status) {
+        DB::transaction(function () use($args, $u, $field, $status, $actionStart, $actionLast, $action) {
             $f = $u->form;
-            $f->{$field} = $args['text'];
+
+            if ($actionStart) {
+                $f->{$field} = $args['text'];
+            } elseif ($actionLast || $action) {
+                $f->{$field} = answerToBoolean($actionLast ? $args['data'] : $args['data']);
+            } else {
+                $f->{$field} = $args['text'];
+            }
+
             $f->save();
 
             $u->status = $status;
             $u->save();
         });
+
         deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
-        editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
-    }
 
-    private function updateFormWithActionStart($args, $u, $field, $status, $text)
-    {
-        DB::transaction(function () use($args, $u, $field, $status) {
-            $f = $u->form;
-            $f->{$field} = $args['text'];
-            $f->save();
-
-            $u->status = $status;
-            $u->save();
-        });
-        editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text, $this->keyboardsService->answer()));
-    }
-
-    private function updateFormWithAction($args, $u, $field, $status, $text)
-    {
-        DB::transaction(function () use($args, $u, $field, $status) {
-            $f = $u->form;
-            $f->{$field} = answerToBoolean($args['data']);
-            $f->save();
-
-            $u->status = $status;
-            $u->save();
-        });
-        editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text, $this->keyboardsService->answer()));
-    }
-
-    private function updateFormWithActionLast($args, $u, $field, $status, $text)
-    {
-        DB::transaction(function () use($args, $u, $field, $status) {
-            $f = $u->form;
-            $f->{$field} = answerToBoolean($args['data']);
-            $f->save();
-
-            $u->status = $status;
-            $u->save();
-        });
-        editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
-        $text = '- Отправь до 4 фотографий из последнего фотосета' . "\n" . '- 2 актуальных селфи' . "\n" . '- 1 видео';
-        sendMessage(createMessageData($u->chatid, $text, $this->keyboardsService->portfolio()));
-    }
-
-    private function started($args, $u, $text)
-    {
-        DB::transaction(function () use($args, $u, $text) {
-            $f = Form::firstOrNew(['user_id' => $u->id]);
-            $f->name = $args['text'];
-            $f->save();
-
-            deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
+        if ($actionStart) {
+            editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text, $this->keyboardsService->answer()));
+        } elseif ($actionLast) {
             editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
+            $additionalText = '- Отправь до 4 фотографий из последнего фотосета' . "\n" . '- 2 актуальных селфи' . "\n" . '- 1 видео';
+            sendMessage(createMessageData($u->chatid, $additionalText, $this->keyboardsService->portfolio()));
+        } else {
+            editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
+        }
+    }
 
-            $u->status = "formBirthdate";
-            $u->save();
-        });
+    private function uploadToPortfolio()
+    {
+
     }
 }

@@ -37,7 +37,13 @@ class CallbackService {
             $this->createForm($u);
         } else if($args['data'] == 2) {
             $text = 'Future© делится успехами';
-            $data = createMessageData($args['message']['chat']['id'],$text,$this->keyboardsService->aboutUs());
+            $data = createMessageData($u->chatid,$text,$this->keyboardsService->aboutUs());
+            sendMessage($data);
+        } else if($args['data'] == 3) {
+
+        } else if($args['data'] == 4) {
+            $text = 'на что нужно обратить внимание:'. "\n" . '     - полный рост'. "\n" . '     - короткое нижнее белье'. "\n" . '     - белое освещение'. "\n" . '     - хорошее качество';
+            $data = createMessageData($u->chatid,$text);
             sendMessage($data);
         }
     }
