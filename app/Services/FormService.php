@@ -121,7 +121,7 @@ class FormService {
     private function updateFormCombined($args, $u, $field, $status, $text, $actionStart = false, $actionLast = false, $action = false)
     {
         DB::transaction(function () use($args, $u, $field, $status, $actionStart, $actionLast, $action) {
-            $f = $u->form;
+            $f = Form::firstOrNew(["user_id" => $u->id]);
 
             if ($actionStart) {
                 $f->{$field} = $args['text'];
