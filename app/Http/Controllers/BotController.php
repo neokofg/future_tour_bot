@@ -27,7 +27,9 @@ class BotController extends Controller
                 $u = $this->callbackService->authUser($args);
                 $this->callbackService->fetchCallback($args, $u);
                 return response(true, 200);
-            };
+            } else {
+                return response($args, 200);
+            }
         } catch (\Throwable $e) {
             return response($e, 422);
         }
