@@ -37,14 +37,25 @@ class CallbackService {
             $this->createForm($u);
         } else if($args['data'] == 2) {
             $text = 'Future© делится успехами';
-            $data = createMessageData($u->chatid,$text,$this->keyboardsService->aboutUs());
-            sendMessage($data);
+            sendMessage(createMessageData($u->chatid,$text,$this->keyboardsService->aboutUs()));
         } else if($args['data'] == 3) {
-
+            if(!$u->isFormFilled()) {
+                sendMessage(createMessageData($u->chatid, 'Произошла ошибка, вы не заполнили форму'));
+            }
+            if(!$u->mediasCount() >= 3) {
+                sendMessage(createMessageData($u->chatid, 'Загрузите минимум 3 фотографии'));
+            }
+            if(!$u->mediasCount('video') >= 1) {
+                sendMessage(createMessageData($u->chatid, 'Загрузите видео'));
+            }
+            $this->formService->appendForm($args,$u);
         } else if($args['data'] == 4) {
             $text = 'на что нужно обратить внимание:'. "\n" . '     - полный рост'. "\n" . '     - короткое нижнее белье'. "\n" . '     - белое освещение'. "\n" . '     - хорошее качество';
-            $data = createMessageData($u->chatid,$text);
-            sendMessage($data);
+            sendMessage(createMessageData($u->chatid,$text));
+        } else if($args['data'] == 5) {
+            sendMessage(createMessageData($u->chatid, 'Файл'));
+        } else {
+            sendMessage(createMessageData($u->chatid, 'Произошла ошибка'));
         }
     }
 

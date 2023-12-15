@@ -67,4 +67,16 @@ class KeyboardsService {
                 ]
             }';
     }
+
+    public function memo(): string
+    {
+        return '{
+                 "inline_keyboard": [[
+                    {
+                        "text": "Памятка",
+                        "callback_data": "5"
+                    }]
+                ]
+            }';
+    }
 }

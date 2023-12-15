@@ -3,7 +3,11 @@
 namespace App\Services;
 
 use App\Models\Form;
+use App\Models\UserMedia;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class FormService {
     public function __construct(private KeyboardsService $keyboardsService)
@@ -113,7 +117,7 @@ class FormService {
                 $this->updateFormCombined($args,$u, 'striptease', 'formPortfolio', 'Спасибо, что вы заполнили анкету <3' . "\n" . '- Первый этап выполнен, остался последний', false, true, false);
                 break;
             case 'formPortfolio':
-                $this->uploadToPortfolio();
+                $this->uploadToPortfolio($args,$u);
                 break;
         }
     }
@@ -146,13 +150,63 @@ class FormService {
             editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
             $additionalText = '- Отправь до 4 фотографий из последнего фотосета' . "\n" . '- 2 актуальных селфи' . "\n" . '- 1 видео';
             sendMessage(createMessageData($u->chatid, $additionalText, $this->keyboardsService->portfolio()));
+            $u->bot_messageid = null;
+            $u->save();
         } else {
             editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
         }
     }
 
-    private function uploadToPortfolio()
+    private function uploadToPortfolio($args,$u)
     {
+        if(isset($args['photo'])){
+            if($u->mediasCount() >= 6) {
+                sendMessage(createMessageData($u->chatid, 'Вы загрузили максимальное количество фотографий'));
+            } else {
+                $f_p = getFilePath(end($args['photo'])['file_id']);
+                $f = getFile($f_p);
+                $f_n = hash('sha256', Carbon::now() . pathinfo($f_p, PATHINFO_FILENAME)) . '.jpg';
+                Storage::disk('s3')->put('future_bot/'.$f_n, $f);
+                $u_m = new UserMedia();
+                $u_m->url = Storage::disk('s3')->url($f_n);
+                $u_m->type = "photo";
+                $u_m->user_id = $u->id;
+                $u_m->save();
+                deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
+                if(isset($u->bot_messageid)){
+                    deleteMessage(createDeleteMessageData($u->chatid, $u->bot_messageid));
+                }
+                $r = sendMessage(createMessageData($u->chatid, 'Видео загружено'));
+                $u->bot_messageid = $r;
+                $u->save();
+            }
+        }else if(isset($args['video'])){
+            if($u->mediasCount('video') >= 1) {
+                sendMessage(createMessageData($u->chatid, 'Вы загрузили максимальное количество видео'));
+            } else {
+                $f_p = getFilePath($args['video']['file_id']);
+                $f = getFile($f_p);
+                $f_n = hash('sha256', Carbon::now() . pathinfo($f_p, PATHINFO_FILENAME)) . '.mp4';
+                Storage::disk('s3')->put('future_bot/'.$f_n, $f);
+                $u_m = new UserMedia();
+                $u_m->url = Storage::disk('s3')->url($f_n);
+                $u_m->type = "video";
+                $u_m->user_id = $u->id;
+                $u_m->save();
+                deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
+                if(isset($u->bot_messageid)){
+                    deleteMessage(createDeleteMessageData($u->chatid, $u->bot_messageid));
+                }
+                $r = sendMessage(createMessageData($u->chatid, 'Видео загружено'));
+                $u->bot_messageid = $r;
+                $u->save();
+            }
+        }
+    }
 
+    public function appendForm($args,$u)
+    {
+        $text = 'Спасибо, что выбрали Future©' . "\n" . "С вами свяжется ТурАгент для комфортной работы" . "\n" . "Все страны, куда вы можете пройти указаны в памятке для модели" ;
+        sendMessage(createMessageData($u->chatid, 'Видео загружено', $this->keyboardsService->memo()));
     }
 }

@@ -17,6 +17,16 @@ function editMessage($data)
     return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/editMessageText?" . http_build_query($data));
 }
 
+function getFilePath($f)
+{
+    return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/getFile?file_id=". $f)['result']['file_path'];
+}
+
+function getFile($f_p)
+{
+    return Http::get("https://api.telegram.org/file/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/". $f_p);
+}
+
 function createMessageData($c, $t, $k = null)
 {
     return [
