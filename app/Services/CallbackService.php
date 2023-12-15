@@ -42,17 +42,13 @@ class CallbackService {
         } else if($args['data'] == 3) {
             if(!$u->isFormFilled()) {
                 sendMessage(createMessageData($u->chatid, 'Произошла ошибка, вы не заполнили форму'));
-                return;
-            }
-            if(!$u->mediasCount() >= 3) {
+            } else if(!$u->mediasCount() >= 3) {
                 sendMessage(createMessageData($u->chatid, 'Загрузите минимум 3 фотографии'));
-                return;
-            }
-            if(!$u->mediasCount('video') >= 1) {
+            } else if(!$u->mediasCount('video') >= 1) {
                 sendMessage(createMessageData($u->chatid, 'Загрузите видео'));
-                return;
+            } else {
+                $this->formService->appendForm($args,$u);
             }
-            $this->formService->appendForm($args,$u);
         } else if($args['data'] == 4) {
             $text = 'на что нужно обратить внимание:'. "\n" . '     - полный рост'. "\n" . '     - короткое нижнее белье'. "\n" . '     - белое освещение'. "\n" . '     - хорошее качество';
             sendMessage(createMessageData($u->chatid,$text));
