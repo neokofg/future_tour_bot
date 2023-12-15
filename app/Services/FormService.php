@@ -56,14 +56,15 @@ class FormService {
     private function started($args, $u, $text)
     {
         DB::transaction(function () use($args, $u, $text) {
-           $f = Form::firstOrNew(['user_id' => $u->id]);
-           $f->name = $args['text'];
-           $f->save();
+            $f = Form::firstOrNew(['user_id' => $u->id]);
+            $f->name = $args['text'];
+            $f->save();
 
+            deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
             editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
 
-           $u->status = "formBirthdate";
-           $u->save();
+            $u->status = "formBirthdate";
+            $u->save();
         });
     }
 }
