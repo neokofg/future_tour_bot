@@ -34,7 +34,7 @@ function createDeleteMessageData(int $c,int $m)
     ];
 }
 
-function createEditMessageData(int $c, int $m, string $t, string $k = null)
+function createEditMessageData(int $c, int $m, string $t, $k = null)
 {
     return [
         'chat_id' => $c,

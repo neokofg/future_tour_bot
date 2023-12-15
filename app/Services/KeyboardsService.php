@@ -51,4 +51,20 @@ class KeyboardsService {
                 ]
             }';
     }
+
+    public function portfolio(): string
+    {
+        return '{
+                 "inline_keyboard": [[
+                    {
+                        "text": "Заполнить",
+                        "callback_data": "3"
+                    },
+                    {
+                        "text": "Пример видео",
+                        "callback_data": "4"
+                    }]
+                ]
+            }';
+    }
 }
