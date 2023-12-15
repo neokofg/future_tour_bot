@@ -3,10 +3,11 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class CallbackService {
 
-    public function __construct(private KeyboardsService $keyboardsService)
+    public function __construct(private KeyboardsService $keyboardsService,private FormService $formService)
     {
 
     }
@@ -29,6 +30,9 @@ class CallbackService {
 
     public function fetchCallback($args, $u)
     {
+        if(Str::startsWith($u->status, 'form')) {
+            $this->formService->fetchForm($args, $u);
+        }
         if($args['data'] == 1) {
             $this->createForm($u);
         } else if($args['data'] == 2) {
@@ -43,13 +47,11 @@ class CallbackService {
         $text = 'Привет,'."\n".'мы подготовили вопросы, которые помогут понять'."\n".'какие страны подходят тебе';
         sendMessage(createMessageData($u->chatid,$text));
 
-        $u->status = "formStarted";
-        $u->save();
-
         $text = 'Как можно к вам обращаться?';
         $response = sendMessage(createMessageData($u->chatid,$text));
 
         $u->bot_messageid = $response;
+        $u->status = "formStarted";
         $u->save();
     }
 }

@@ -34,11 +34,19 @@ function createDeleteMessageData(int $c,int $m)
     ];
 }
 
-function createEditMessageData(int $c, int $m, string $t)
+function createEditMessageData(int $c, int $m, string $t, string $k = null)
 {
     return [
         'chat_id' => $c,
         'message_id' => $m,
-        'text' => $t
+        'text' => $t,
+        'reply_markup' => $k
     ];
+}
+function answerToBoolean(string $a): bool
+{
+    return match ($a) {
+        'yes' => true,
+        'no' => false,
+    };
 }

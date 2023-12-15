@@ -6,6 +6,10 @@ use App\Models\Form;
 use Illuminate\Support\Facades\DB;
 
 class FormService {
+    public function __construct(private KeyboardsService $keyboardsService)
+    {
+    }
+
     public function fetchForm($args, $u)
     {
         switch ($u->status) {
@@ -36,6 +40,18 @@ class FormService {
             case 'formContact':
                 $this->updateForm($args,$u, 'contact', 'formAnal_sex', 'Рабочий номер телефона/логин');
                 break;
+            case 'formAnal_sex':
+                $this->updateFormWithAction($args,$u, 'anal_sex', 'formCum_in_mouth', 'Анальный секс');
+                break;
+            case 'formCum_in_mouth':
+                $this->updateFormWithAction($args,$u, 'cum_in_mouth', 'formSwallowing', 'Окончание в рот');
+                break;
+            case 'formSwallowing':
+                $this->updateFormWithAction($args,$u, 'cum_on_face', 'formCum_on_body', 'Проглатывание');
+                break;
+            case 'formCum_on_body':
+                $this->updateFormWithAction($args,$u, 'cum_on_body', 'formBlowjob_without_a_condom', 'Минет без презерватива');
+                break;
         }
     }
 
@@ -51,6 +67,20 @@ class FormService {
         });
         deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
         editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
+    }
+
+    private function updateFormWithAction($args, $u, $field, $status, $text)
+    {
+        DB::transaction(function () use($args, $u, $field, $status) {
+            $f = $u->form;
+            $f->{$field} = answerToBoolean($args['data']);
+            $f->save();
+
+            $u->status = $status;
+            $u->save();
+        });
+        deleteMessage(createDeleteMessageData($u->chatid, $args['message']['message_id']));
+        editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text, $this->keyboardsService->answer()));
     }
 
     private function started($args, $u, $text)

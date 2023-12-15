@@ -35,4 +35,20 @@ class KeyboardsService {
                 ]
             }';
     }
+
+    public function answer(): string
+    {
+        return '{
+                 "inline_keyboard": [[
+                    {
+                        "text": "Да",
+                        "callback_data": "yes"
+                    },
+                    {
+                        "text": "Нет",
+                        "callback_data": "no"
+                    }]
+                ]
+            }';
+    }
 }
