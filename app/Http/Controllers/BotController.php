@@ -13,10 +13,10 @@ class BotController extends Controller
 
     }
 
-    public function init()
+    public function init(Request $request)
     {
         try {
-            $args = json_decode(file_get_contents('php://input'), true);
+            $args = json_decode($request->getContent(), true);
             if(isset($args['message'])){
                 $args = $args['message'];
                 $u = $this->botService->authUser($args);
@@ -28,7 +28,7 @@ class BotController extends Controller
                 $this->callbackService->fetchCallback($args, $u);
                 return response(true, 200);
             } else {
-                return response($args, 200);
+                return $args;
             }
         } catch (\Throwable $e) {
             return response($e, 422);
