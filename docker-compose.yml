@@ -22,16 +22,16 @@ services:
             - ../cyber-test/site:/site
     pg:
         container_name: pg
-        image: postgres:15-alpine
+        image: postgres
         volumes:
-            - .:/workspace/db
+            - pgdata:/var/lib/postgresql/data
         environment:
             - POSTGRES_DB=main
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=password
         ports:
             - "5432:5432"
-        restart: on-failure
+        restart: always
     pgadmin:
         depends_on:
             - pg
