@@ -49,6 +49,8 @@ class FormService {
             $u->status = $status;
             $u->save();
         });
+        deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
+        deleteMessage(createDeleteMessageData($u->chatid, (intval($args['message_id'])) - 1));
         sendMessage(createMessageData($u->chatid, $text));
     }
 
