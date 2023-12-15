@@ -47,6 +47,9 @@ class CallbackService {
         $u->save();
 
         $text = 'Как можно к вам обращаться?';
-        sendMessage(createMessageData($u->chatid,$text));
+        $response = sendMessage(createMessageData($u->chatid,$text));
+
+        $u->bot_messageid = $response;
+        $u->save();
     }
 }

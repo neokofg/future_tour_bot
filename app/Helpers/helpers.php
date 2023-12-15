@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Http;
 
 function sendMessage($data)
 {
-    return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/sendMessage?" . http_build_query($data));
+    return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/sendMessage?" . http_build_query($data))['result']['message_id'];
 }
 
 function deleteMessage($data)

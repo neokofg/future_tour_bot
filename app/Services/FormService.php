@@ -61,10 +61,9 @@ class FormService {
            $f->save();
 
 
-           $response = sendMessage(createMessageData($u->chatid, $text));
+           sendMessage(createMessageData($u->chatid, $text));
 
            $u->status = "formBirthdate";
-           $u->bot_messageid = $response->json('result.message_id');
            $u->save();
         });
     }
