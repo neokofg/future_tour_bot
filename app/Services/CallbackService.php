@@ -24,7 +24,7 @@ class CallbackService {
             $u->language_code = $args['from']['language_code'];
             $u->save();
         }
-        return $u;
+        return $u->fresh();
     }
 
     public function fetchCallback($args, $u)
