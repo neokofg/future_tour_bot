@@ -10,36 +10,36 @@ class FormService {
     {
         switch ($u->status) {
             case 'formStarted':
-                $this->started($args, $u);
+                $this->started($args, $u, 'Год вашего рождения');
                 break;
             case 'formBirthdate':
-                $this->updateForm($args,$u, 'birthdate', 'formHeight');
+                $this->updateForm($args,$u, 'birthdate', 'formHeight', 'Рост');
                 break;
             case 'formHeight':
-                $this->updateForm($args,$u, 'height', 'formWeight');
+                $this->updateForm($args,$u, 'height', 'formWeight', 'Вес');
                 break;
             case 'formWeight':
-                $this->updateForm($args,$u, 'weight', 'formSize');
+                $this->updateForm($args,$u, 'weight', 'formSize', 'Размер');
                 break;
             case 'formSize':
-                $this->updateForm($args,$u, 'size', 'formCitizenship');
+                $this->updateForm($args,$u, 'size', 'formCitizenship', 'Гражданство');
                 break;
             case 'formCitizenship':
-                $this->updateForm($args,$u, 'visa', 'formTour_date');
+                $this->updateForm($args,$u, 'visa', 'formTour_date', 'Наличие визы');
                 break;
             case 'formTour_date':
-                $this->updateForm($args,$u, 'tour_date', 'formCountries');
+                $this->updateForm($args,$u, 'tour_date', 'formCountries', 'Желаемая дата тура');
                 break;
             case 'formCountries':
-                $this->updateForm($args,$u, 'countries', 'formContact');
+                $this->updateForm($args,$u, 'countries', 'formContact', 'В каких странах был опыт');
                 break;
             case 'formContact':
-                $this->updateForm($args,$u, 'contact', 'formAnal_sex');
+                $this->updateForm($args,$u, 'contact', 'formAnal_sex', 'Рабочий номер телефона/логин');
                 break;
         }
     }
 
-    private function updateForm($args, $u, $field, $status)
+    private function updateForm($args, $u, $field, $status, $text)
     {
         DB::transaction(function () use($args, $u, $field, $status) {
             $f = $u->form;
@@ -49,9 +49,10 @@ class FormService {
             $u->status = $status;
             $u->save();
         });
+        sendMessage(createMessageData($u->chatid, $text));
     }
 
-    private function started($args, $u)
+    private function started($args, $u, $text)
     {
         DB::transaction(function () use($args, $u) {
            $f = Form::firstOrNew(['user_id' => $u->id]);
@@ -61,5 +62,6 @@ class FormService {
            $u->status = "formBirthdate";
            $u->save();
         });
+        sendMessage(createMessageData($u->chatid, $text));
     }
 }
