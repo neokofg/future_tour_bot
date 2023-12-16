@@ -28,6 +28,16 @@ function editOrSendMessage($u, $t, $k = null)
     }
 }
 
+function sendVideo($data)
+{
+    return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/sendVideo?" . http_build_query($data));
+}
+
+function sendPhoto($data)
+{
+    return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/sendPhoto?" . http_build_query($data));
+}
+
 function getFilePath($f)
 {
     return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/getFile?file_id=". $f)['result']['file_path'];
@@ -69,10 +79,36 @@ function createEditMessageData(int $c, int $m, string $t, $k = null)
         'reply_markup' => $k
     ];
 }
+
+function createVideoMessageData(int $c, string $u)
+{
+    return [
+        'chat_id' => $c,
+        'video' => $u,
+    ];
+}
+
+function createPhotoMessageData(int $c, string $u)
+{
+    return [
+        'chat_id' => $c,
+        'photo' => $u,
+    ];
+}
+
+
 function answerToBoolean(string $a): bool
 {
     return match ($a) {
         'yes' => true,
         'no' => false,
+    };
+}
+
+function booleanToAnswer(bool $b): string
+{
+    return match ($b) {
+        true => 'ДА',
+        false => 'НЕТ',
     };
 }

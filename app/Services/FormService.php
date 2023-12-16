@@ -208,5 +208,52 @@ class FormService {
     {
         $text = 'Спасибо, что выбрали Future©' . "\n" . "С вами свяжется ТурАгент для комфортной работы" . "\n" . "Все страны, куда вы можете пройти указаны в памятке для модели" ;
         editOrSendMessage($u, $text, $this->keyboardsService->memo());
+        $u->bot_messageid = null;
+        $u->save();
+        sendVideo(createVideoMessageData('-1002133427547', $u->medias()->where('type', '=', 'video')->first()->url));
+        foreach($u->medias()->where('type', '=', 'photo') as $photo) {
+            sendPhoto(createPhotoMessageData('-1002133427547', $photo->url));
+        }
+        sendMessage(createMessageData('-1002133427547', 'Контактная информация: ' . $u->contact));
+        sendMessage(createMessageData('-1002133427547', $this->createReadyForm($u)));
+
+    }
+
+    private function createReadyForm($u)
+    {
+        return '1. Имя: ' . $u->form->name . "\n" . '
+            2. Возраст: ' . Carbon::parse($u->form->birthdate)->age . "\n" . '
+            3.1 Рост: ' . $u->form->height . "\n" . '
+            3.2 Вес: ' . $u->form->weight . "\n" . '
+            3.3 Размер: ' . $u->form->size . "\n" . '
+            4. Гражданство: ' . $u->form->citizenship . "\n" . '
+            5. Виза: ' . $u->form->visa . "\n" . '
+            6. Дата вылета: ' . $u->form->tour_date . "\n" . '
+            7. Опыт: ' . $u->form->countries . "\n" . '
+
+            Сервис ' . "\n" . '
+            8. Анальный секс: '. booleanToAnswer($u->form->anal_sex) . "\n" . '
+            9. Окончание в рот: '. booleanToAnswer($u->form->cum_in_mouth) . "\n" . '
+            10. Проглатывание: '. booleanToAnswer($u->form->swallowing) . "\n" . '
+            11. Окончание на лицо: '. booleanToAnswer($u->form->cum_on_face) . "\n" . '
+            12. Окончание на тело: '. booleanToAnswer($u->form->cum_on_body) . "\n" . '
+            13. МБР: '. booleanToAnswer($u->form->blowjob_without_a_condom) . "\n" . '
+            14. Глубокая глотка: '. booleanToAnswer($u->form->deep_throat) . "\n" . '
+            15. Французский поцелуй: '. booleanToAnswer($u->form->french_kiss) . "\n" . '
+            16. Фистинг: '. booleanToAnswer($u->form->fisting) . "\n" . '
+            17. Римминг: '. booleanToAnswer($u->form->rimming) . "\n" . '
+            18. Римминг модели: '. booleanToAnswer($u->form->rimming_you) . "\n" . '
+            19. Футфетишь: '. booleanToAnswer($u->form->footjob) . "\n" . '
+            20. Золотой дождь: '. booleanToAnswer($u->form->golden_shower) . "\n" . '
+            21. Легкая доминация: '. booleanToAnswer($u->form->light_domination) . "\n" . '
+            22. Жесткая доминация: '. booleanToAnswer($u->form->hard_domination) . "\n" . '
+            23. Рабыня: '. booleanToAnswer($u->form->are_you_a_slave) . "\n" . '
+            24. Семейная пара: '. booleanToAnswer($u->form->married_couple) . "\n" . '
+            25. Групповой секс: '. booleanToAnswer($u->form->group_sex) . "\n" . '
+            26. Ролевые игры: '. booleanToAnswer($u->form->role_playing_games) . "\n" . '
+            27. Массаж простаты: '. booleanToAnswer($u->form->prostate_massage) . "\n" . '
+            28. Лизание яичек: '. booleanToAnswer($u->form->licking_testicles) . "\n" . '
+            29. Обычный массаж: '. booleanToAnswer($u->form->normal_relax_massage) . "\n" . '
+            30. Стриптиз: '. booleanToAnswer($u->form->striptease);
     }
 }
