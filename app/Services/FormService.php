@@ -222,7 +222,7 @@ class FormService {
     private function createReadyForm($u)
     {
         return '1. Имя: ' . $u->form->name . "\n" . '
-            2. Возраст: ' . Carbon::parse($u->form->birthdate)->age ?? $u->form->birthdate . "\n" . '
+            2. Возраст: ' . Carbon::parse($u->form->birthdate) instanceof Carbon ? Carbon::parse($u->form->birthdate)->age . ' лет' : $u->form->birthdate . "\n" . '
             3.1 Рост: ' . $u->form->height . "\n" . '
             3.2 Вес: ' . $u->form->weight . "\n" . '
             3.3 Размер: ' . $u->form->size . "\n" . '
