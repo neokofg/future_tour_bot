@@ -54,6 +54,7 @@ class CallbackService {
         } else if($args['data'] == 5) {
             sendMessage(createMessageData($u->chatid, 'Файл'));
         }
+        answerCallback($args['id']);
     }
 
     private function createForm($u)

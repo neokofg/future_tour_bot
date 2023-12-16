@@ -176,7 +176,7 @@ class FormService {
                 if(isset($u->bot_messageid)){
                     deleteMessage(createDeleteMessageData($u->chatid, $u->bot_messageid));
                 }
-                $r = sendMessage(createMessageData($u->chatid, 'Видео загружено'));
+                $r = sendMessage(createMessageData($u->chatid, 'Фотография загружена'));
                 $u->bot_messageid = $r;
                 $u->save();
             }

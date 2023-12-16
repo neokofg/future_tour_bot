@@ -27,6 +27,11 @@ function getFile($f_p)
     return Http::get("https://api.telegram.org/file/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/". $f_p);
 }
 
+function answerCallback($c)
+{
+    return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/answerCallbackQuery?callback_query_id=". $c);
+}
+
 function createMessageData($c, $t, $k = null)
 {
     return [
