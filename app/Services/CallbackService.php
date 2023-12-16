@@ -40,17 +40,17 @@ class CallbackService {
             sendMessage(createMessageData($u->chatid,$text,$this->keyboardsService->aboutUs()));
         } else if($args['data'] == 3) {
             if(!$u->isFormFilled()) {
-                editMessage(createEditMessageData($u->chatid, $u->bot_messageid, 'Произошла ошибка, вы не заполнили форму'));
+                editOrSendMessage($u, 'Произошла ошибка, вы не заполнили форму');
             } else if(!$u->mediasCount() >= 3) {
-                editMessage(createEditMessageData($u->chatid, $u->bot_messageid,'Загрузите минимум 3 фотографии'));
+                editOrSendMessage($u,'Загрузите минимум 3 фотографии');
             } else if(!$u->mediasCount('video') >= 1) {
-                editMessage(createEditMessageData($u->chatid, $u->bot_messageid,'Загрузите видео'));
+                editOrSendMessage($u,'Загрузите видео');
             } else {
                 $this->formService->appendForm($args,$u);
             }
         } else if($args['data'] == 4) {
             $text = 'на что нужно обратить внимание:'. "\n" . '     - полный рост'. "\n" . '     - короткое нижнее белье'. "\n" . '     - белое освещение'. "\n" . '     - хорошее качество';
-            sendMessage(createMessageData($u->chatid,$text));
+            editOrSendMessage($u,$text);
         } else if($args['data'] == 5) {
             sendMessage(createMessageData($u->chatid, 'Файл'));
         }

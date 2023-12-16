@@ -17,6 +17,17 @@ function editMessage($data)
     return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/editMessageText?" . http_build_query($data));
 }
 
+function editOrSendMessage($u, $t, $k = null)
+{
+    if(isset($u->bot_messageid)) {
+        editMessage(createEditMessageData($u->chatid, $u->bot_messageid, $t, $k));
+    } else {
+        $r = sendMessage(createMessageData($u->chatid, $t, $k));
+        $u->bot_messageid = $r;
+        $u->save();
+    }
+}
+
 function getFilePath($f)
 {
     return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/getFile?file_id=". $f)['result']['file_path'];

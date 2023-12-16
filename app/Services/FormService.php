@@ -207,6 +207,6 @@ class FormService {
     public function appendForm($args,$u)
     {
         $text = 'Спасибо, что выбрали Future©' . "\n" . "С вами свяжется ТурАгент для комфортной работы" . "\n" . "Все страны, куда вы можете пройти указаны в памятке для модели" ;
-        sendMessage(createMessageData($u->chatid, $text, $this->keyboardsService->memo()));
+        editOrSendMessage($u, $text, $this->keyboardsService->memo());
     }
 }
