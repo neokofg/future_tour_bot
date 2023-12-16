@@ -40,11 +40,11 @@ class CallbackService {
             sendMessage(createMessageData($u->chatid,$text,$this->keyboardsService->aboutUs()));
         } else if($args['data'] == 3) {
             if(!$u->isFormFilled()) {
-                sendMessage(createMessageData($u->chatid, 'Произошла ошибка, вы не заполнили форму'));
+                editMessage(createEditMessageData($u->chatid, $u->bot_messageid, 'Произошла ошибка, вы не заполнили форму'));
             } else if(!$u->mediasCount() >= 3) {
-                sendMessage(createMessageData($u->chatid, 'Загрузите минимум 3 фотографии'));
+                editMessage(createEditMessageData($u->chatid, $u->bot_messageid,'Загрузите минимум 3 фотографии'));
             } else if(!$u->mediasCount('video') >= 1) {
-                sendMessage(createMessageData($u->chatid, 'Загрузите видео'));
+                editMessage(createEditMessageData($u->chatid, $u->bot_messageid,'Загрузите видео'));
             } else {
                 $this->formService->appendForm($args,$u);
             }
