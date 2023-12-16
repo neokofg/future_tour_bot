@@ -59,14 +59,19 @@ class CallbackService {
 
     private function createForm($u)
     {
-        $text = 'Привет,'."\n".'мы подготовили вопросы, которые помогут понять'."\n".'какие страны подходят тебе';
-        sendMessage(createMessageData($u->chatid,$text));
+        if(!$u->isFormFilled()){
+            $text = 'Привет,'."\n".'мы подготовили вопросы, которые помогут понять'."\n".'какие страны подходят тебе';
+            sendMessage(createMessageData($u->chatid,$text));
 
-        $text = 'Как можно к вам обращаться?';
-        $response = sendMessage(createMessageData($u->chatid,$text));
+            $text = 'Как можно к вам обращаться?';
+            $response = sendMessage(createMessageData($u->chatid,$text));
 
-        $u->bot_messageid = $response;
-        $u->status = "formStarted";
-        $u->save();
+            $u->bot_messageid = $response;
+            $u->status = "formStarted";
+            $u->save();
+        } else {
+            sendMessage(createMessageData($u->chatid, 'Вы уже заполнили форму'));
+        }
+
     }
 }
