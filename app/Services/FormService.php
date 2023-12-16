@@ -214,7 +214,7 @@ class FormService {
         foreach($u->medias()->where('type', '=', 'photo') as $photo) {
             sendPhoto(createPhotoMessageData('-1002133427547', $photo->url));
         }
-        sendMessage(createMessageData('-1002133427547', 'Контактная информация: ' . $u->contact));
+        sendMessage(createMessageData('-1002133427547', 'Контактная информация: ' . $u->form->contact));
         sendMessage(createMessageData('-1002133427547', $this->createReadyForm($u)));
 
     }
@@ -222,7 +222,7 @@ class FormService {
     private function createReadyForm($u)
     {
         return '1. Имя: ' . $u->form->name . "\n" . '
-            2. Возраст: ' . Carbon::parse($u->form->birthdate)->age . "\n" . '
+            2. Возраст: ' . Carbon::parse($u->form->birthdate)->age ?? $u->form->birthdate . "\n" . '
             3.1 Рост: ' . $u->form->height . "\n" . '
             3.2 Вес: ' . $u->form->weight . "\n" . '
             3.3 Размер: ' . $u->form->size . "\n" . '
