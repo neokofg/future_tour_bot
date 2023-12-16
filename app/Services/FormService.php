@@ -210,7 +210,7 @@ class FormService {
         editOrSendMessage($u, $text, $this->keyboardsService->memo());
         $u->bot_messageid = null;
         $u->save();
-        sendMediaGroup(createMediaGroupData('-1002133427547', $u->medias));
+        sendMediaGroup(createMediaGroupData('-1002133427547', $u->medias()->get()->toArray()));
         sendMessage(createMessageData('-1002133427547', 'Контактная информация: ' . $u->form->contact));
         sendMessage(createMessageData('-1002133427547', $this->createReadyForm($u)));
     }
