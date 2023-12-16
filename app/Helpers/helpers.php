@@ -123,8 +123,8 @@ function createMediaGroupData(int $c,array $medias)
     $mediaArray = [];
     foreach($medias as $media) {
         $mediaArray[] = [
-            "type" => $media->type,
-            "media" => $media->url
+            "type" => $media['type'],
+            "media" => $media['url']
         ];
     }
 
