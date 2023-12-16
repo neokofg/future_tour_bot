@@ -127,9 +127,8 @@ function createMediaGroupData(int $c,array $medias)
             "media" => $media['url']
         ];
     }
-
     return [
         'chat_id' => $c,
-        'media' => $mediaArray
+        'media' => json_encode($mediaArray)
     ];
 }

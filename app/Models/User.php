@@ -32,8 +32,8 @@ class User extends Authenticatable
     public function isFormFilled()
     {
         if(isset($this->form)) {
-            foreach ($this->form()->first()->toArray() as $field => $value) {
-                if (empty($value)) {
+            foreach ($this->form->toArray() as $field => $value) {
+                if ($value === null) {
                     return false;
                 }
             }
