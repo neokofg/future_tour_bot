@@ -32,7 +32,6 @@ class CallbackService {
     {
         if(Str::startsWith($u->status, 'form')) {
             $this->formService->fetchForm($args, $u);
-            return;
         }
         if($args['data'] == 1) {
             $this->createForm($u);
@@ -54,8 +53,6 @@ class CallbackService {
             sendMessage(createMessageData($u->chatid,$text));
         } else if($args['data'] == 5) {
             sendMessage(createMessageData($u->chatid, 'Файл'));
-        } else {
-            sendMessage(createMessageData($u->chatid, 'Произошла ошибка'));
         }
     }
 
