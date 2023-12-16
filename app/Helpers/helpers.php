@@ -38,6 +38,11 @@ function sendPhoto($data)
     return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/sendPhoto?" . http_build_query($data));
 }
 
+function sendMediaGroup($data)
+{
+    return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/sendMediaGroup?" . http_build_query($data));
+}
+
 function getFilePath($f)
 {
     return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/getFile?file_id=". $f)['result']['file_path'];
@@ -111,4 +116,20 @@ function booleanToAnswer(bool $b): string
         true => 'ДА',
         false => 'НЕТ',
     };
+}
+
+function createMediaGroupData(int $c,array $medias)
+{
+    $mediaArray = [];
+    foreach($medias as $media) {
+        $mediaArray[] = [
+            "type" => $media->type,
+            "media" => $media->url
+        ];
+    }
+
+    return [
+        'chat_id' => $c,
+        'media' => $mediaArray
+    ];
 }

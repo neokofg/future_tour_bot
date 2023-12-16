@@ -49,6 +49,7 @@ return new class extends Migration
             $table->boolean("normal_relax_massage")->nullable();
             $table->boolean("striptease")->nullable();
 
+            $table->boolean('is_posted')->default(false);
             $table->foreignId('user_id')->unique()->constrained('users')->cascadeOnDelete();
         });
     }

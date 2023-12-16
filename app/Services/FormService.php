@@ -210,13 +210,9 @@ class FormService {
         editOrSendMessage($u, $text, $this->keyboardsService->memo());
         $u->bot_messageid = null;
         $u->save();
-        sendVideo(createVideoMessageData('-1002133427547', $u->medias()->where('type', '=', 'video')->first()->url));
-        foreach($u->medias()->where('type', '=', 'photo')->get() as $photo) {
-            sendPhoto(createPhotoMessageData('-1002133427547', $photo->url));
-        }
+        sendMediaGroup(createMediaGroupData('-1002133427547', $u->medias));
         sendMessage(createMessageData('-1002133427547', 'Контактная информация: ' . $u->form->contact));
         sendMessage(createMessageData('-1002133427547', $this->createReadyForm($u)));
-
     }
 
     private function createReadyForm($u)
