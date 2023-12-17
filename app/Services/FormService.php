@@ -216,8 +216,6 @@ class FormService {
             editOrSendMessage($u, 'Вы уже отправили анкету, с вами свяжется ТурАгент');
         } else {
             DB::transaction(function() use($args, $u) {
-                $u->bot_messageid = null;
-                $u->save();
                 $u->form->generateNumber();
                 sendMediaGroup(createMediaGroupData('-1002133427547', $u->medias()->get()->toArray()));
                 sendMessage(createMessageData('-1002133427547', 'Контактная информация: ' . $u->form->contact));
@@ -226,6 +224,8 @@ class FormService {
                 $u->form->save();
                 $text = 'Спасибо, что выбрали Future©' . "\n" . "С вами свяжется ТурАгент для комфортной работы" . "\n" . "Все страны, куда вы можете пройти указаны в памятке для модели" ;
                 editOrSendMessage($u, $text, $this->keyboardsService->memo());
+                $u->bot_messageid = null;
+                $u->save();
             });
         }
     }
