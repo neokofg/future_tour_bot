@@ -244,8 +244,8 @@ class FormService {
 7. Опыт: ' . $u->form->countries . "\n" . '
 
 Сервис ' . "\n" . '
-8. Анальный секс: '. booleanToAnswer($u->form->anal_sex) . "\n" . '
-9. Окончание в рот: '. booleanToAnswer($u->form->cum_in_mouth) . "\n" . '
+8. Анальный секс: '. booleanToAnswer($u->form->anal_sex) . '
+9. Окончание в рот: '. booleanToAnswer($u->form->cum_in_mouth) . '
 10. Проглатывание: '. booleanToAnswer($u->form->swallowing) . "\n" . '
 11. Окончание на лицо: '. booleanToAnswer($u->form->cum_on_face) . "\n" . '
 12. Окончание на тело: '. booleanToAnswer($u->form->cum_on_body) . "\n" . '
