@@ -50,6 +50,7 @@ return new class extends Migration
             $table->boolean("striptease")->nullable();
 
             $table->boolean('is_posted')->default(false);
+            $table->integer('number')->nullable()->unique();
             $table->foreignId('user_id')->unique()->constrained('users')->cascadeOnDelete();
         });
     }

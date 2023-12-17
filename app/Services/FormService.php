@@ -153,7 +153,8 @@ class FormService {
             $u->bot_messageid = null;
             $u->save();
         } else {
-            editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
+            $answerText = '✅ Ваш ответ: '. $args['text'];
+            editForTimeMessage($u->chatid, $u->botmessageid, $answerText, $text);
         }
     }
 
@@ -213,6 +214,7 @@ class FormService {
             editOrSendMessage($u, $text, $this->keyboardsService->memo());
             $u->bot_messageid = null;
             $u->save();
+            $u->form->generateNumber();
             sendMediaGroup(createMediaGroupData('-1002133427547', $u->medias()->get()->toArray()));
             sendMessage(createMessageData('-1002133427547', 'Контактная информация: ' . $u->form->contact));
             sendMessage(createMessageData('-1002133427547', $this->createReadyForm($u)));
@@ -223,7 +225,8 @@ class FormService {
 
     private function createReadyForm($u)
     {
-        return '1. Имя: ' . $u->form->name . "\n" . '
+        return 'Порядковый номер: #' . $u->form->number . '
+1. Имя: ' . $u->form->name . "\n" . '
 2. Возраст: ' . $u->form->birthdate . "\n" . '
 3.1 Рост: ' . $u->form->height . "\n" . '
 3.2 Вес: ' . $u->form->weight . "\n" . '

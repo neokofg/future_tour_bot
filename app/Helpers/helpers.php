@@ -17,6 +17,23 @@ function editMessage($data)
     return Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/editMessageText?" . http_build_query($data));
 }
 
+function editForTimeMessage($c, $m, $t1, $t2)
+{
+    $data = [
+        "chat_id" => $c,
+        "message_id" => $m,
+        "text" => $t1
+    ];
+    $newData = [
+        "chat_id" => $c,
+        "message_id" => $m,
+        "text" => $t2
+    ];
+    Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/editMessageText?" . http_build_query($data));
+    sleep(5);
+    Http::get("https://api.telegram.org/bot6739120381:AAGTQuyHKVkjaZS727EYElZbaWQQ6_DS-5E/editMessageText?" . http_build_query($newData));
+}
+
 function editOrSendMessage($u, $t, $k = null)
 {
     if(isset($u->bot_messageid)) {

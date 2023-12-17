@@ -20,5 +20,16 @@ class Form extends Model
         return $this->belongsTo(User::class, "user_id", "id");
     }
 
+    public function generateNumber()
+    {
+        // Находим последнее число в столбце 'number' из всех моделей
+        $lastNumber = self::max('number');
+
+        // Если столбец 'number' пуст или не содержит чисел, начинаем с 1
+        $nextNumber = $lastNumber ? $lastNumber + 1 : 1;
+
+        $this->number = $nextNumber;
+        $this->save();
+    }
 
 }

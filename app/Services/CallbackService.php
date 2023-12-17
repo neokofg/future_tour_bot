@@ -41,8 +41,8 @@ class CallbackService {
         } else if($args['data'] == 3) {
             if(!$u->isFormFilled()) {
                 editOrSendMessage($u, 'Произошла ошибка, вы не заполнили форму');
-            } else if(!$u->mediasCount() >= 3) {
-                editOrSendMessage($u,'Загрузите минимум 3 фотографии');
+            } else if(!$u->mediasCount() >= 5) {
+                editOrSendMessage($u,'Загрузите минимум 5 фотографий');
             } else if(!$u->mediasCount('video') >= 1) {
                 editOrSendMessage($u,'Загрузите видео');
             } else {
