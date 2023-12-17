@@ -33,8 +33,10 @@ class User extends Authenticatable
     {
         if(isset($this->form)) {
             foreach ($this->form->toArray() as $field => $value) {
-                if ($value === null) {
-                    return false;
+                if($field != 'number') {
+                    if ($value === null) {
+                        return false;
+                    }
                 }
             }
             return true;
