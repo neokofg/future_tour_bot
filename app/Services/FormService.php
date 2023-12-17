@@ -124,7 +124,7 @@ class FormService {
 
     private function updateFormCombined($args, $u, $field, $status, $text, $actionStart = false, $actionLast = false, $action = false)
     {
-        DB::transaction(function () use($args, $u, $field, $status, $actionStart, $actionLast, $action) {
+        DB::transaction(function () use($args, $u, $field, $status, $actionStart, $actionLast, $action, $text) {
             $f = Form::firstOrNew(["user_id" => $u->id]);
 
             if ($actionStart) {
@@ -139,23 +139,28 @@ class FormService {
 
             $u->status = $status;
             $u->save();
-        });
-        if(isset($args['message_id'])){
-            deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
-        }
 
-        if ($actionStart || $action) {
-            editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text, $this->keyboardsService->answer()));
-        } elseif ($actionLast) {
-            editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
-            $additionalText = '- Отправь до 4 фотографий из последнего фотосета' . "\n" . '- 2 актуальных селфи' . "\n" . '- 1 видео';
-            sendMessage(createMessageData($u->chatid, $additionalText, $this->keyboardsService->portfolio()));
-            $u->bot_messageid = null;
-            $u->save();
-        } else {
-            $answerText = '✅ Ваш ответ: '. $args['text'];
-            editForTimeMessage($u->chatid, $u->botmessageid, $answerText, $text);
-        }
+
+            if(isset($args['message_id'])){
+                deleteMessage(createDeleteMessageData($u->chatid, $args['message_id']));
+            }
+
+            if ($actionStart) {
+                $answerText = '✅ Ваш ответ: '. $args['text'];
+                editForTimeMessage($u->chatid, $u->bot_messageid, $answerText, $text, $this->keyboardsService->answer());
+            } elseif($action) {
+                editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text, $this->keyboardsService->answer()));
+            } elseif ($actionLast) {
+                editMessage(createEditMessageData($u->chatid, $u->bot_messageid , $text));
+                $additionalText = '- Отправь до 4 фотографий из последнего фотосета' . "\n" . '- 2 актуальных селфи' . "\n" . '- 1 видео';
+                sendMessage(createMessageData($u->chatid, $additionalText, $this->keyboardsService->portfolio()));
+                $u->bot_messageid = null;
+                $u->save();
+            } else {
+                $answerText = '✅ Ваш ответ: '. $args['text'];
+                editForTimeMessage($u->chatid, $u->bot_messageid, $answerText, $text);
+            }
+        });
     }
 
     private function uploadToPortfolio($args,$u)
@@ -210,16 +215,18 @@ class FormService {
         if($u->form->is_posted) {
             editOrSendMessage($u, 'Вы уже отправили анкету, с вами свяжется ТурАгент');
         } else {
-            $text = 'Спасибо, что выбрали Future©' . "\n" . "С вами свяжется ТурАгент для комфортной работы" . "\n" . "Все страны, куда вы можете пройти указаны в памятке для модели" ;
-            editOrSendMessage($u, $text, $this->keyboardsService->memo());
-            $u->bot_messageid = null;
-            $u->save();
-            $u->form->generateNumber();
-            sendMediaGroup(createMediaGroupData('-1002133427547', $u->medias()->get()->toArray()));
-            sendMessage(createMessageData('-1002133427547', 'Контактная информация: ' . $u->form->contact));
-            sendMessage(createMessageData('-1002133427547', $this->createReadyForm($u)));
-            $u->form->is_posted = true;
-            $u->form->save();
+            DB::transaction(function() use($args, $u) {
+                $u->bot_messageid = null;
+                $u->save();
+                $u->form->generateNumber();
+                sendMediaGroup(createMediaGroupData('-1002133427547', $u->medias()->get()->toArray()));
+                sendMessage(createMessageData('-1002133427547', 'Контактная информация: ' . $u->form->contact));
+                sendMessage(createMessageData('-1002133427547', $this->createReadyForm($u)));
+                $u->form->is_posted = true;
+                $u->form->save();
+                $text = 'Спасибо, что выбрали Future©' . "\n" . "С вами свяжется ТурАгент для комфортной работы" . "\n" . "Все страны, куда вы можете пройти указаны в памятке для модели" ;
+                editOrSendMessage($u, $text, $this->keyboardsService->memo());
+            });
         }
     }
 
